@@ -4,10 +4,10 @@
 package main
 
 import (
-	"fmt"
-	"flag"
-	"os"
 	"bufio"
+	"flag"
+	"fmt"
+	"os"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 	defer f.Close()
 
 	if err != nil {
-		fmt.Println("Error loading file: ",err)
+		fmt.Println("Error loading file: ", err)
 		return
 	}
 
@@ -36,7 +36,3 @@ func main() {
 
 	p.Print()
 }
-
-
-
-

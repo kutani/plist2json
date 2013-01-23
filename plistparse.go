@@ -4,8 +4,8 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
+	"fmt"
 	"strconv"
 )
 
@@ -20,7 +20,7 @@ func (self *Dict) add(k *KeyPair) {
 	copy(n_arry, self.array)
 	self.array = n_arry
 
-	self.array = self.array[0:l+1]
+	self.array = self.array[0 : l+1]
 	self.array[l] = k
 }
 
@@ -46,9 +46,9 @@ type KeyPair struct {
 }
 
 func (self *KeyPair) Print() {
-	fmt.Print("\""+self.k+"\": ")
+	fmt.Print("\"" + self.k + "\": ")
 	if self.t == "string" {
-		fmt.Print("\""+self.s+"\"")
+		fmt.Print("\"" + self.s + "\"")
 		return
 	}
 
@@ -65,48 +65,6 @@ func (self *KeyPair) Print() {
 		self.d.Print()
 	}
 }
-
-
-/*
-func ReadPlist(rd *bufio.Reader) *Dict {
-
-	var d *Dict = nil
-
-	for  {
-		c, s, err := rd.ReadRune()
-
-		if err != nil {
-			fmt.Println(err)
-			break
-		}
-
-		if s > 1 {
-			fmt.Println("Got Rune, but we don't support unicode yet!")
-			break
-		}
-
-
-		switch(c) {
-		case '<':
-			st := rd.getNextToken('>')
-			fmt.Println(st)
-
-			if st == "dict" {
-				if d == nil {
-					d = new(Dict)
-					continue
-				}
-			} else if st == "key" {
-				k := new(KeyPair)
-				st := rd.getNextToken('<')
-				k.k = st
-			}
-		}
-	}
-
-
-	return d
-}*/
 
 func ReadPlist(rd *bufio.Reader) *Dict {
 	for {
@@ -136,7 +94,6 @@ func ReadPlist(rd *bufio.Reader) *Dict {
 	return nil
 }
 
-
 func readDict(rd *bufio.Reader) *Dict {
 
 	d := new(Dict)
@@ -162,7 +119,7 @@ func readDict(rd *bufio.Reader) *Dict {
 			if st == "key" {
 				k = new(KeyPair)
 				d.add(k)
-				st := getNextToken(rd,'<')
+				st := getNextToken(rd, '<')
 				k.k = st
 				continue
 			}
@@ -175,16 +132,16 @@ func readDict(rd *bufio.Reader) *Dict {
 
 			if st == "string" {
 				k.t = st
-				st := getNextToken(rd,'<')
+				st := getNextToken(rd, '<')
 				k.s = st
 			}
 
 			if st == "integer" {
 				k.t = st
-				st := getNextToken(rd,'<')
+				st := getNextToken(rd, '<')
 				is, err := strconv.Atoi(st)
 				if err == nil {
-					k.i = is 
+					k.i = is
 				} else {
 					k.i = 0
 				}
@@ -206,7 +163,6 @@ func readDict(rd *bufio.Reader) *Dict {
 	return d
 }
 
-
 func getNextToken(rd *bufio.Reader, delim byte) string {
 	s, err := rd.ReadString(delim)
 	if err != nil {
@@ -216,5 +172,3 @@ func getNextToken(rd *bufio.Reader, delim byte) string {
 	s = s[:len(s)-1]
 	return s
 }
-
-
