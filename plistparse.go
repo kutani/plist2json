@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"fmt"
 	"strconv"
+	"os"
 )
 
 type Dict struct {
@@ -66,7 +67,9 @@ func (self *KeyPair) Print() {
 	}
 }
 
-func ReadPlist(rd *bufio.Reader) *Dict {
+func ReadPlist(f *os.File) *Dict {
+	rd := bufio.NewReader(f)
+
 	for {
 		c, s, err := rd.ReadRune()
 
